@@ -1,5 +1,6 @@
 steps:
 
+# Build Docker Image
 - name: 'gcr.io/cloud-builders/docker'
   args:
     - 'build'
@@ -7,11 +8,13 @@ steps:
     - 'gcr.io/$PROJECT_ID/myapp:$SHORT_SHA'
     - '.'
 
+# Push Docker Image
 - name: 'gcr.io/cloud-builders/docker'
   args:
     - 'push'
     - 'gcr.io/$PROJECT_ID/myapp:$SHORT_SHA'
 
+# Deploy to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args:
